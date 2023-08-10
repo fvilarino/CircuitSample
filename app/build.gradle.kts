@@ -68,6 +68,6 @@ dependencies {
     implementation(libs.androidx.appcompat.appcompat)
     implementation(libs.com.google.android.material.material)
 
-    implementation(libs.com.google.dagger.dagger.compiler)
+    implementation(libs.com.google.dagger.dagger)
     kapt(libs.com.google.dagger.dagger.compiler)
 }

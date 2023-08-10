@@ -26,6 +26,7 @@ androidx-compose-ui-ui-tooling = { module = "androidx.compose.ui:ui-tooling", ve
 androidx-compose-ui-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-compose-ui-version" }
 com-android-tools-build-gradle = { module = "com.android.tools.build:gradle", version.ref = "com-android-tools-build-gradle-version" }
 com-google-android-material-material = { module = "com.google.android.material:material", version.ref = "com-google-android-material-material-version" }
+com-google-dagger-dagger = { module = "com.google.dagger:dagger", version.ref = "com-google-dagger-version" }
 com-google-dagger-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "com-google-dagger-version" }
 com-slack-circuit-circuit-backstack = { module = "com.slack.circuit:circuit-backstack", version.ref = "com-slack-circuit-circuit-version" }
 com-slack-circuit-circuit-codegen = { module = "com.slack.circuit:circuit-codegen", version.ref = "com-slack-circuit-circuit-version" }
