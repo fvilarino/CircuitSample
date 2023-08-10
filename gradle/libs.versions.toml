@@ -1,0 +1,62 @@
+[versions]
+android-plugin-version = "8.2.0-alpha15"
+androidx-activity-compose-version = "1.7.2"
+androidx-appcompat-appcompat-version = "1.7.0-alpha03"
+androidx-compose-compiler-version = "1.5.0"
+androidx-compose-version = "1.6.0-alpha03"
+androidx-compose-material3-material3-version = "1.2.0-alpha05"
+androidx-compose-ui-version = "1.5.0"
+com-android-tools-build-gradle-version = "8.2.0-alpha15"
+com-google-dagger-version = "2.47"
+com-google-devtools-ksp-plugin-version = "1.9.0-1.0.13"
+com-google-android-material-material-version = "1.9.0"
+com-slack-circuit-circuit-version = "0.12.1"
+com-squareup-anvil-version = "2.4.7"
+org-jetbrains-kotlin-kotlin-gradle-plugin-version = "1.9.0"
+
+[libraries]
+androidx-activity-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose-version" }
+androidx-appcompat-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat-appcompat-version" }
+androidx-compose-animation-animation-graphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "androidx-compose-version" }
+androidx-compose-material-material = { module = "androidx.compose.material:material", version.ref = "androidx-compose-version" }
+androidx-compose-material-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidx-compose-version" }
+androidx-compose-material3-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-compose-material3-material3-version" }
+androidx-compose-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose-version" }
+androidx-compose-ui-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose-ui-version" }
+androidx-compose-ui-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-compose-ui-version" }
+com-android-tools-build-gradle = { module = "com.android.tools.build:gradle", version.ref = "com-android-tools-build-gradle-version" }
+com-google-android-material-material = { module = "com.google.android.material:material", version.ref = "com-google-android-material-material-version" }
+com-google-dagger-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "com-google-dagger-version" }
+com-slack-circuit-circuit-backstack = { module = "com.slack.circuit:circuit-backstack", version.ref = "com-slack-circuit-circuit-version" }
+com-slack-circuit-circuit-codegen = { module = "com.slack.circuit:circuit-codegen", version.ref = "com-slack-circuit-circuit-version" }
+com-slack-circuit-circuit-codegen-annotations = { module = "com.slack.circuit:circuit-codegen-annotations", version.ref = "com-slack-circuit-circuit-version" }
+com-slack-circuit-circuit-foundation = { module = "com.slack.circuit:circuit-foundation", version.ref = "com-slack-circuit-circuit-version" }
+com-slack-circuit-circuit-runtime = { module = "com.slack.circuit:circuit-runtime", version.ref = "com-slack-circuit-circuit-version" }
+com-slack-circuit-circuit-runtime-presenter = { module = "com.slack.circuit:circuit-runtime-presenter", version.ref = "com-slack-circuit-circuit-version" }
+com-slack-circuit-circuit-runtime-ui = { module = "com.slack.circuit:circuit-runtime-ui", version.ref = "com-slack-circuit-circuit-version" }
+com-squareup-anvil-annotations = { module = "com.squareup.anvil:annotations", version.ref = "com-squareup-anvil-version" }
+org-jetbrains-kotlin-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "org-jetbrains-kotlin-kotlin-gradle-plugin-version" }
+
+[bundles]
+circuit = [
+    "com-slack-circuit-circuit-backstack",
+    "com-slack-circuit-circuit-codegen-annotations",
+    "com-slack-circuit-circuit-foundation",
+    "com-slack-circuit-circuit-runtime",
+    "com-slack-circuit-circuit-runtime-presenter",
+    "com-slack-circuit-circuit-runtime-ui",
+]
+compose = [
+    "androidx-compose-animation-animation-graphics",
+    "androidx-compose-compose-ui",
+    "androidx-compose-material-material",
+    "androidx-compose-material-material-icons-extended",
+    "androidx-compose-material3-material3",
+    "androidx-compose-ui-ui-tooling-preview",
+]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android-plugin-version" }
+com-squareup-anvil = { id = "com.squareup.anvil", version.ref = "com-squareup-anvil-version" }
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-devtools-ksp-plugin-version" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-kotlin-gradle-plugin-version" }
