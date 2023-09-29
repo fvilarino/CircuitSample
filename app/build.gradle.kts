@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.application)
@@ -44,12 +46,30 @@ android {
     buildFeatures {
         compose = true
     }
+    val compilerVersion = libs.versions.androidx.compose.compiler.version.get()
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
+        kotlinCompilerExtensionVersion = compilerVersion
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    //testOptions.unitTests.isReturnDefaultValues = true
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+        unitTests.all { test ->
+            test.useJUnitPlatform {
+                includeEngines("junit-jupiter")
+            }
+            test.testLogging {
+                events("passed", "skipped", "failed")
+                showStandardStreams = true
+                showStackTraces = true
+                showCauses = true
+                exceptionFormat = TestExceptionFormat.FULL
+            }
         }
     }
 }
@@ -70,4 +90,6 @@ dependencies {
 
     implementation(libs.com.google.dagger.dagger)
     kapt(libs.com.google.dagger.dagger.compiler)
+
+    testImplementation(libs.bundles.test)
 }

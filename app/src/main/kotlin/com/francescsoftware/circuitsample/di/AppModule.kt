@@ -12,5 +12,5 @@ abstract class AppModule {
     @Binds
     @ApplicationContext
     @SingleIn(AppScope::class)
-    abstract fun Application.provideApplicationContext(): Context
+    abstract fun provideApplicationContext(application: Application): Context
 }
