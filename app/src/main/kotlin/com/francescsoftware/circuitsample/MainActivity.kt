@@ -11,7 +11,6 @@ import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
-import com.slack.circuit.foundation.push
 import com.slack.circuit.foundation.rememberCircuitNavigator
 import javax.inject.Inject
 
@@ -21,7 +20,8 @@ class MainActivity : ComponentActivity() {
     lateinit var circuit: Circuit
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as CircuitApplication).appComponent.inject(this)
+        val appComponent = (application as CircuitApplication).appComponent
+        appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContent {
             CircuitSampleTheme {
