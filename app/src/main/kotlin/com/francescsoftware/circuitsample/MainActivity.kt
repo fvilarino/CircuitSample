@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import com.francescsoftware.circuitsample.ui.home.HomeScreen
 import com.francescsoftware.circuitsample.ui.theme.CircuitSampleTheme
@@ -14,6 +15,8 @@ import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.rememberCircuitNavigator
+import com.slack.circuit.retained.LocalRetainedStateRegistry
+import com.slack.circuit.retained.continuityRetainedStateRegistry
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +31,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             CircuitSampleTheme {
                 CircuitCompositionLocals(circuit) {
-                    SampleApp()
+                    CompositionLocalProvider(
+                        LocalRetainedStateRegistry provides continuityRetainedStateRegistry(),
+                    ) {
+                        SampleApp()
+                    }
                 }
             }
         }
