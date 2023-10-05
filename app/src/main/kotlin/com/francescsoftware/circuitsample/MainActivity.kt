@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.francescsoftware.circuitsample.ui.home.HomeScreen
 import com.francescsoftware.circuitsample.ui.theme.CircuitSampleTheme
@@ -26,17 +28,26 @@ class MainActivity : ComponentActivity() {
         setContent {
             CircuitSampleTheme {
                 CircuitCompositionLocals(circuit) {
-                    val backstack = rememberSaveableBackStack {
-                        push(HomeScreen)
-                    }
-                    val navigator = rememberCircuitNavigator(backstack)
-                    NavigableCircuitContent(
-                        navigator = navigator,
-                        backstack = backstack,
-                        modifier = Modifier.fillMaxSize(),
-                    )
+                    SampleApp()
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun SampleApp() {
+    CircuitSampleTheme {
+        Surface {
+            val backstack = rememberSaveableBackStack {
+                push(HomeScreen)
+            }
+            val navigator = rememberCircuitNavigator(backstack)
+            NavigableCircuitContent(
+                navigator = navigator,
+                backstack = backstack,
+                modifier = Modifier.fillMaxSize(),
+            )
         }
     }
 }

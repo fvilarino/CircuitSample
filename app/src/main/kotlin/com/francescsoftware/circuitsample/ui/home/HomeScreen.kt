@@ -3,15 +3,12 @@ package com.francescsoftware.circuitsample.ui.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Button
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,8 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.francescsoftware.circuitsample.di.AppScope
 import com.francescsoftware.circuitsample.di.NumberGenerator
-import com.francescsoftware.circuitsample.ui.theme.CircuitSampleTheme
+import com.francescsoftware.circuitsample.ui.details.DetailsScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
+import com.slack.circuit.retained.rememberRetained
 import com.slack.circuit.runtime.CircuitContext
 import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
@@ -30,9 +28,12 @@ import com.slack.circuit.runtime.screen.Screen
 import com.slack.circuit.runtime.ui.Ui
 import com.slack.circuit.runtime.ui.ui
 import com.squareup.anvil.annotations.ContributesMultibinding
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
-import javax.inject.Provider
+
 
 @Parcelize
 object HomeScreen : Screen {
@@ -43,21 +44,32 @@ object HomeScreen : Screen {
 
     sealed interface Event : CircuitUiEvent {
         data object Generate : Event
+        data object DetailsClick : Event
     }
 }
 
-@CircuitInject(HomeScreen::class, AppScope::class)
-class HomePresenter @Inject constructor(
+class HomePresenter @AssistedInject constructor(
+    @Assisted private val navigator: Navigator,
     private val numberGenerator: NumberGenerator,
 ) : Presenter<HomeScreen.State> {
+
+    @CircuitInject(HomeScreen::class, AppScope::class)
+    @AssistedFactory
+    fun interface Factory {
+        fun create(
+            navigator: Navigator,
+        ): HomePresenter
+    }
+
     @Composable
     override fun present(): HomeScreen.State {
-        var label by remember { mutableStateOf("") }
+        var label by rememberRetained { mutableStateOf("") }
         return HomeScreen.State(
             label = label
         ) { event ->
             when (event) {
                 HomeScreen.Event.Generate -> label = numberGenerator.generate().toString()
+                HomeScreen.Event.DetailsClick -> navigator.goTo(DetailsScreen)
             }
         }
     }
@@ -66,45 +78,47 @@ class HomePresenter @Inject constructor(
 @CircuitInject(HomeScreen::class, AppScope::class)
 @Composable
 fun Home(state: HomeScreen.State, modifier: Modifier = Modifier) {
-    CircuitSampleTheme {
-        Surface {
-            Box(
-                modifier = modifier,
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Text(
+                text = state.label,
+                color = Color.Red,
+            )
+            Button(
+                onClick = { state.eventSink(HomeScreen.Event.Generate) }
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .wrapContentHeight(align = Alignment.CenterVertically),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    Text(
-                        text = state.label,
-                        color = Color.Red,
-                    )
-                    Button(
-                        onClick = { state.eventSink(HomeScreen.Event.Generate) }
-                    ) {
-                        Text(
-                            text = "Generate"
-                        )
-                    }
-                }
+                Text(
+                    text = "Generate"
+                )
+            }
+            Button(
+                onClick = { state.eventSink(HomeScreen.Event.DetailsClick) }
+            ) {
+                Text(
+                    text = "To Details"
+                )
             }
         }
     }
 }
 
+
 @ContributesMultibinding(AppScope::class)
 class HomePresenterFactory2 @Inject constructor(
-    private val provider: Provider<HomePresenter>,
+    private val factory: HomePresenter.Factory,
 ) : Presenter.Factory {
     override fun create(
         screen: Screen,
         navigator: Navigator,
         context: CircuitContext,
     ): Presenter<*>? = when (screen) {
-        HomeScreen -> provider.get()
+        HomeScreen -> factory.create(navigator = navigator)
         else -> null
     }
 }

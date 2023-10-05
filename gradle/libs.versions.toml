@@ -1,11 +1,11 @@
 [versions]
 android-plugin-version = "8.3.0-alpha06"
-androidx-activity-compose-version = "1.7.2"
+androidx-activity-compose-version = "1.8.0"
 androidx-appcompat-appcompat-version = "1.7.0-alpha03"
 androidx-compose-compiler-version = "1.5.3"
-androidx-compose-version = "1.6.0-alpha06"
+androidx-compose-version = "1.6.0-alpha07"
 androidx-compose-material3-material3-version = "1.2.0-alpha08"
-androidx-compose-ui-version = "1.5.2"
+androidx-compose-ui-version = "1.5.3"
 androidx-test-ext-junit = "1.1.5"
 circuit-test = "0.15.0"
 com-android-tools-build-gradle-version = "8.2.0-beta06"
@@ -44,6 +44,7 @@ com-slack-circuit-circuit-backstack = { module = "com.slack.circuit:circuit-back
 com-slack-circuit-circuit-codegen = { module = "com.slack.circuit:circuit-codegen", version.ref = "com-slack-circuit-circuit-version" }
 com-slack-circuit-circuit-codegen-annotations = { module = "com.slack.circuit:circuit-codegen-annotations", version.ref = "com-slack-circuit-circuit-version" }
 com-slack-circuit-circuit-foundation = { module = "com.slack.circuit:circuit-foundation", version.ref = "com-slack-circuit-circuit-version" }
+com-slack-circuit-circuit-retained = { module = "com.slack.circuit:circuit-retained", version.ref = "com-slack-circuit-circuit-version" }
 com-slack-circuit-circuit-runtime = { module = "com.slack.circuit:circuit-runtime", version.ref = "com-slack-circuit-circuit-version" }
 com-slack-circuit-circuit-runtime-presenter = { module = "com.slack.circuit:circuit-runtime-presenter", version.ref = "com-slack-circuit-circuit-version" }
 com-slack-circuit-circuit-runtime-ui = { module = "com.slack.circuit:circuit-runtime-ui", version.ref = "com-slack-circuit-circuit-version" }
@@ -65,6 +66,7 @@ circuit = [
     "com-slack-circuit-circuit-backstack",
     "com-slack-circuit-circuit-codegen-annotations",
     "com-slack-circuit-circuit-foundation",
+    "com-slack-circuit-circuit-retained",
     "com-slack-circuit-circuit-runtime",
     "com-slack-circuit-circuit-runtime-presenter",
     "com-slack-circuit-circuit-runtime-ui",
