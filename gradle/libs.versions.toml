@@ -1,5 +1,5 @@
 [versions]
-android-plugin-version = "8.3.0-alpha06"
+android-plugin-version = "8.3.0-alpha07"
 androidx-activity-compose-version = "1.8.0"
 androidx-appcompat-appcompat-version = "1.7.0-alpha03"
 androidx-compose-compiler-version = "1.5.3"
