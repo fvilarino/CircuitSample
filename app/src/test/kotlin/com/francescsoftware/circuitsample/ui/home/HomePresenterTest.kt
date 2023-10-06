@@ -3,6 +3,7 @@ package com.francescsoftware.circuitsample.ui.home
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.francescsoftware.circuitsample.di.NumberGenerator
+import com.slack.circuit.test.FakeNavigator
 import com.slack.circuit.test.test
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
@@ -19,7 +20,10 @@ class HomePresenterTest {
                 return 42
             }
         }
-        val presenter = HomePresenter(numberGenerator)
+        val presenter = HomePresenter(
+            navigator = FakeNavigator(),
+            numberGenerator = numberGenerator
+        )
         presenter.test {
             var item = awaitItem()
             assertThat(item.label).isEqualTo("")
