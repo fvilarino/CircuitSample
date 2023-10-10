@@ -53,7 +53,7 @@ class DetailsPresenter @AssistedInject constructor(
 
     @Composable
     override fun present(): DetailsScreen.State {
-        var label by remember { mutableStateOf("Go Back") }
+        val label by remember { mutableStateOf("Go Back") }
         return DetailsScreen.State(
             label = label
         ) { event ->

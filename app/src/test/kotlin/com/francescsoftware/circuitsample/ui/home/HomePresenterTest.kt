@@ -27,7 +27,7 @@ class HomePresenterTest {
         presenter.test {
             var item = awaitItem()
             assertThat(item.label).isEqualTo("")
-            item.eventSink(HomeScreen.Event.Generate)
+            item.eventSink(HomeScreen.Event.GenerateRandomNumber)
             item = awaitItem()
             assertThat(item.label).isEqualTo("42")
         }
