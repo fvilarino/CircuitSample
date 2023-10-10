@@ -23,6 +23,7 @@ import com.francescsoftware.circuitsample.di.AppScope
 import com.francescsoftware.circuitsample.ui.details.DetailsScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.retained.collectAsRetainedState
+import com.slack.circuit.retained.rememberRetained
 import com.slack.circuit.runtime.CircuitContext
 import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
@@ -117,8 +118,6 @@ class HomePresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,
 ) : Presenter<HomeScreen.State> {
 
-    private val promptGenerator = PromptGenerator()
-
     @CircuitInject(HomeScreen::class, AppScope::class)
     @AssistedFactory
     fun interface Factory {
@@ -129,6 +128,9 @@ class HomePresenter @AssistedInject constructor(
 
     @Composable
     override fun present(): HomeScreen.State {
+        val promptGenerator = rememberRetained {
+            PromptGenerator()
+        }
         val prompt by promptGenerator.prompt.collectAsRetainedState(initial = HomeScreen.Prompt.Idle)
         return HomeScreen.State(
             prompt = prompt,
